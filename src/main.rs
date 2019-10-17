@@ -4,6 +4,7 @@ mod latlng;
 mod utils;
 mod constants; 
 mod rectangle;
+mod line;
 
 use crate::point::Point;
 
