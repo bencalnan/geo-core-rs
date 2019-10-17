@@ -3,6 +3,7 @@ mod point3d;
 mod latlng;
 mod utils;
 mod constants; 
+mod rectangle;
 
 use crate::point::Point;
 
