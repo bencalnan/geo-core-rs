@@ -1,4 +1,8 @@
 mod point;
+mod point3d;
+mod latlng;
+mod utils;
+mod constants; 
 
 use crate::point::Point;
 

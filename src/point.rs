@@ -1,4 +1,5 @@
 #![allow(dead_code)]
+use crate::latlng::LatLng;
 
 pub struct Point {
     pub x: f64,
@@ -11,6 +12,11 @@ impl Point {
     fn new(x: f64, y: f64) -> Point {
         Point { x: x, y: y }
     }
+
+    fn new_lat_lng(lat_lng:LatLng) -> Point {
+	    Point{x: lat_lng.lng, y: lat_lng.lat}
+    }
+
     //Instance Method
     fn add(&self, n: Point) -> Point {
         Point {
