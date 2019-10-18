@@ -1,6 +1,7 @@
 #![allow(dead_code)]
 use crate::latlng::LatLng;
 
+#[derive(Copy, Clone)]
 pub struct Point {
     pub x: f64,
     pub y: f64,
