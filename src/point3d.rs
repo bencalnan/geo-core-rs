@@ -10,7 +10,6 @@ pub struct Point3D {
     pub z: f64,
 }
 
-// Methods
 impl Point3D {
     fn new(x: f64, y: f64, z: f64) -> Point3D {
         Point3D { x: x, y: y, z: z }
@@ -24,7 +23,6 @@ impl Point3D {
     }
 }
 
-// Traits
 impl GeomType for Point3D {
     fn describe(&self) -> String {
         String::from("point3D")
