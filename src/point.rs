@@ -1,5 +1,6 @@
 #![allow(dead_code)]
 use crate::latlng::LatLng;
+use crate::geometry::Geometry;
 
 #[derive(Copy, Clone)]
 pub struct Point {
@@ -34,12 +35,9 @@ impl Point {
     }
 }
 
-impl GeomType for Point {
+impl Geometry for Point {
     fn describe(&self) -> String {
         String::from("point")
     }
 }
 
-pub trait GeomType {
-    fn describe(&self) -> String;
-}

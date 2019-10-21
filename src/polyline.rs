@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 use crate::line::Line;
-use crate::point::GeomType;
+use crate::geometry::Geometry;
 use crate::point::Point;
 
 //PolyLine - Aka Polygonal chain, linestring,
@@ -141,7 +141,7 @@ impl PolyLine {
 // }
 
 // Traits
-impl GeomType for PolyLine {
+impl Geometry for PolyLine {
     fn describe(&self) -> String {
         String::from("polyline")
     }

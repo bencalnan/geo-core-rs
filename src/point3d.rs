@@ -1,7 +1,7 @@
 #![allow(dead_code)]
 use crate::constants::EARTH_RADIUS;
 use crate::latlng::LatLng;
-use crate::point::GeomType;
+use crate::geometry::Geometry;
 
 //Point3D - 3 Dimensional Point
 pub struct Point3D {
@@ -23,7 +23,7 @@ impl Point3D {
     }
 }
 
-impl GeomType for Point3D {
+impl Geometry for Point3D {
     fn describe(&self) -> String {
         String::from("point3D")
     }

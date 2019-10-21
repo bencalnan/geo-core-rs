@@ -6,6 +6,7 @@ mod constants;
 mod rectangle;
 mod line;
 mod polyline;
+mod geometry; 
 
 use crate::point::Point;
 

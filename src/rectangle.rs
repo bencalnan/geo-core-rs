@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 use crate::point::Point;
-use crate::point::GeomType;
+use crate::geometry::Geometry;
 
 pub struct Rectangle {
     pub p1: Point,
@@ -32,7 +32,7 @@ impl Rectangle {
     }
 }
 // Traits
-impl GeomType for Rectangle {
+impl Geometry for Rectangle {
     fn describe(&self) -> String {
         String::from("rectangle")
     }

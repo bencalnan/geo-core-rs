@@ -1,5 +1,5 @@
 #![allow(dead_code)]
-use crate::point::GeomType;
+use crate::geometry::Geometry;
 use crate::point::Point;
 use crate::rectangle::Rectangle;
 
@@ -41,7 +41,7 @@ impl Line {
 }
 
 // Traits
-impl GeomType for Line {
+impl Geometry for Line {
     fn describe(&self) -> String {
         String::from("line")
     }
