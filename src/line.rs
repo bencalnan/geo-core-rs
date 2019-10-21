@@ -13,36 +13,38 @@ impl <T>Line<T> {
         Line { start: a, end: b }
     }
 
-    fn bbox(&self) -> Rectangle {
+    fn bbox(&self) -> Rectangle<T> {
         Rectangle {
             p1: Point {
                 x: self.start.x.min(self.end.x),
                 y: self.start.y.min(self.end.y),
             },
             p2: Point {
-                x: self.coords[0].x.max(self.coords[1].x),
-                y: self.coords[0].y.max(self.coords[1].y),
+                x: self.start.x.max(self.end.x),
+                y: self.start.y.max(self.end.y),
             },
         }
     }
     //The Euclidean distance between two points of the plane with Cartesian coordinates
     //Calculates Hypoteneuse between two Points.
     fn length(&self) -> f64 {
-        ((self.coords[1].x - self.coords[0].x).powi(2)
-            + (self.coords[1].y - self.coords[0].y).powi(2))
+        ((self.end.x - self.start.x).powi(2)
+            + (self.end.y - self.start.y).powi(2))
         .sqrt()
     }
 
-    fn centroid(&self) -> Point {
+    fn centroid(&self) -> Point<T> {
         Point {
-            x: (self.coords[0].x + self.coords[1].x).abs() / 2.0,
-            y: (self.coords[0].y + self.coords[1].y).abs() / 2.0,
+            x: (self.start.x + self.end.x).abs() / 2.0,
+            y: (self.start.y + self.end.y).abs() / 2.0,
         }
     }
 }
 
+s
+
 // Traits
-impl GeomType for Line {
+impl GeomType for Line<T> {
     fn describe(&self) -> String {
         String::from("line")
     }
