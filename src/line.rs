@@ -3,20 +3,21 @@ use crate::point::GeomType;
 use crate::point::Point;
 use crate::rectangle::Rectangle;
 
-pub struct Line {
-    pub coords: [Point; 2],
+pub struct Line<T> {
+    pub start: Point<T>,
+    pub end: Point<T>,
 }
 
-impl Line {
-    fn new(a: Point, b: Point) -> Line {
-        Line { coords: [a, b] }
+impl <T>Line<T> {
+    fn new<T>(a: Point<T>, b: Point<T>) -> Line<T> {
+        Line { start: a, end: b }
     }
 
     fn bbox(&self) -> Rectangle {
         Rectangle {
             p1: Point {
-                x: self.coords[0].x.min(self.coords[1].x),
-                y: self.coords[0].y.min(self.coords[1].y),
+                x: self.start.x.min(self.end.x),
+                y: self.start.y.min(self.end.y),
             },
             p2: Point {
                 x: self.coords[0].x.max(self.coords[1].x),

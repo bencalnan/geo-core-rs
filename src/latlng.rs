@@ -17,7 +17,7 @@ impl LatLng {
     fn new(lat: f64, lng: f64) -> LatLng {
         LatLng { lat: lat, lng: lng }
     }
-    fn new_from_point(p: Point) -> LatLng {
+    fn new_from_point(p: Point<f64>) -> LatLng {
         LatLng { lat: p.y, lng: p.x }
     }
     fn convert_to_radian(&self) -> LatLng {
@@ -32,7 +32,7 @@ impl LatLng {
             lng: rad_to_deg(self.lng),
         }
     }
-    fn convert_to_point(&self) -> Point {
+    fn convert_to_point(&self) -> Point<f64> {
         Point {
             x: self.lng,
             y: self.lat,

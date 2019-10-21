@@ -2,12 +2,12 @@
 use crate::point::Point;
 use crate::point::GeomType;
 
-pub struct Rectangle {
-    pub p1: Point,
-    pub p2: Point,
+pub struct Rectangle<T> {
+    pub p1: Point<T>,
+    pub p2: Point<T>,
 }
 
-impl Rectangle {
+impl <T>Rectangle<T> {
     fn area(&self) -> f64 {
         let Point { x: x1, y: y1 } = self.p1;
         let Point { x: x2, y: y2 } = self.p2;
@@ -32,7 +32,7 @@ impl Rectangle {
     }
 }
 // Traits
-impl GeomType for Rectangle {
+impl GeomType for Rectangle<T> {
     fn describe(&self) -> String {
         String::from("rectangle")
     }
