@@ -1,9 +1,9 @@
 #![allow(dead_code)]
+use crate::constants::EARTH_RADIUS;
 use crate::point::Point;
 use crate::point3d::Point3D;
 use crate::utils::deg_to_rad;
 use crate::utils::rad_to_deg;
-use crate::constants::EARTH_RADIUS;
 
 //LatLng - Lat Long Coordinate
 pub struct LatLng {
@@ -14,9 +14,14 @@ pub struct LatLng {
 
 // Methods
 impl LatLng {
-    fn new(lat: f64, lng: f64) -> LatLng {
-        LatLng { lat: lat, lng: lng }
+    
+    fn new<T: Into<f64>>(lat: T, lng: T) -> LatLng {
+        LatLng {
+            lat: lat.into(),
+            lng: lng.into(),
+        }
     }
+
     fn new_from_point(p: Point) -> LatLng {
         LatLng { lat: p.y, lng: p.x }
     }
@@ -38,11 +43,11 @@ impl LatLng {
             y: self.lat,
         }
     }
-    fn convert_to_point3d(&self) -> Point3D{
+    fn convert_to_point3d(&self) -> Point3D {
         Point3D {
             x: EARTH_RADIUS * self.lat.cos() * self.lng.cos(),
             y: EARTH_RADIUS * self.lat.cos() * self.lng.sin(),
-            z: EARTH_RADIUS * self.lat.sin()
+            z: EARTH_RADIUS * self.lat.sin(),
         }
     }
 }
