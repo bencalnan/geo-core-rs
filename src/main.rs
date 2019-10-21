@@ -7,6 +7,7 @@ mod rectangle;
 mod line;
 mod polyline;
 mod geometry; 
+mod crs;
 
 use crate::point::Point;
 
