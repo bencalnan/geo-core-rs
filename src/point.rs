@@ -1,8 +1,8 @@
 #![allow(dead_code)]
 use crate::latlng::LatLng;
 use std::ops::Add;
+use std::ops::AddAssign;
 use std::ops::Sub;
-
 #[derive(Copy, Clone)]
 pub struct Point<T> {
     pub x: T,
@@ -49,6 +49,13 @@ impl<T: Sub<Output = T>> Sub for Point<T> {
             x: self.x - other.x,
             y: self.y - other.y,
         }
+    }
+}
+
+impl<T: AddAssign<T>> AddAssign for Point<T> {
+    fn add_assign(&mut self, rhs: Self) {
+            self.x += rhs.x;
+            self.y += rhs.y;
     }
 }
 

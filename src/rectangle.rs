@@ -23,7 +23,7 @@ impl <T>Rectangle<T> {
 
     // This method requires the caller object to be mutable
     // `&mut self` desugars to `self: &mut Self`
-    fn translate(&mut self, x: f64, y: f64) {
+    fn translate<T>(&mut self, x: T, y: T) {
         self.p1.x += x;
         self.p2.x += x;
 
