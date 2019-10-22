@@ -41,10 +41,8 @@ impl <T>Line<T> {
     }
 }
 
-s
-
 // Traits
-impl GeomType for Line<T> {
+impl<T> GeomType for Line<T> {
     fn describe(&self) -> String {
         String::from("line")
     }

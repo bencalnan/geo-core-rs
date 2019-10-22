@@ -31,9 +31,11 @@ impl <T>Rectangle<T> {
         self.p2.y += y;
     }
 }
-// Traits
-impl GeomType for Rectangle<T> {
+
+
+impl <T> GeomType for Rectangle<T> {
     fn describe(&self) -> String {
         String::from("rectangle")
     }
 }
+

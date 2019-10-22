@@ -16,21 +16,10 @@ pub struct LatLng {
 impl LatLng {
     fn new<T: Into<f64>>(lat: T, lng: T) -> LatLng {
         LatLng {
-            lat: T.into(),
-            lng: T.into(),
+            lat: lat.into(),
+            lng: lng.into(),
         }
     }
-    //Alternative Syntax
-    // fn new<T>(lat: T, lng: T) -> LatLng
-    // where
-    //     T: Into<f64>,
-    // {
-    //     LatLng {
-    //         lat: T.into(),
-    //         lng: T.into(),
-    //     }
-    // }
-
     fn new_from_point(p: Point<f64>) -> LatLng {
         LatLng { lat: p.y, lng: p.x }
     }

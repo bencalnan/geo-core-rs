@@ -9,7 +9,7 @@ pub struct Point<T> {
     pub y: T,
 }
 
-impl <T>Point<T> {
+impl<T> Point<T> {
     fn new<T>(x: T, y: T) -> Point<T> {
         Point { x: x, y: y }
     }
@@ -20,16 +20,18 @@ impl <T>Point<T> {
             y: lat_lng.lat,
         }
     }
-
 }
 
-//Traits
-impl <T>GeomType for Point<T> {
+impl<T> GeomType for Point<T> {
     fn describe(&self) -> String {
         String::from("point")
     }
 }
-impl<T: Add<Output = T>> Add for Point<T> {
+
+impl<T> Add for Point<T>
+where
+    T: Add<Output = T>,
+{
     type Output = Self;
     fn add(self, other: Self) -> Self::Output {
         Self {
@@ -49,7 +51,6 @@ impl<T: Sub<Output = T>> Sub for Point<T> {
         }
     }
 }
-
 
 pub trait GeomType {
     fn describe(&self) -> String;
