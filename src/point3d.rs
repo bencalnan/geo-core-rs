@@ -12,7 +12,7 @@ pub struct Point3D {
 
 impl Point3D {
     fn new(x: f64, y: f64, z: f64) -> Point3D {
-        Point3D { x: x, y: y, z: z }
+        Point3D { x, y, z }
     }
     //ConvertToLatLng - Takes a 3D Cartesian Point (ECEF) and returns Lat/Lngs in Radians. (Geocentric -> Geodetic)
     fn convert_to_lat_lng(&self) -> LatLng {
