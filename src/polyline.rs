@@ -1,7 +1,8 @@
 #![allow(dead_code)]
-use crate::line::Line;
 use crate::geometry::Geometry;
+use crate::line::Line;
 use crate::point::Point;
+use crate::rectangle::Rectangle;
 
 //PolyLine - Aka Polygonal chain, linestring,
 struct PolyLine {
@@ -20,86 +21,98 @@ impl PolyLine {
         }
         pl
     }
+    fn new_from_lines(lines: Vec<Line>) -> PolyLine {
+        PolyLine {
+            lines: lines.to_vec(),
+        }
+    }
+    fn length(&self) -> f64 {
+        let mut length = 0.0;
+        for l in self.lines.iter() {
+            length += l.length()
+        }
+        length
+    }
+
+    fn vertices(&self) -> Vec<Point> {
+        let mut v = Vec::<Point>::new();
+        for (i, l) in self.lines.iter().enumerate() {
+            if i == 0 {
+                v.push(l.coords[0]) // Add first point as well on first line.
+            }
+            v.push(l.coords[1]) // Only add 2nd Point normally so don't duplicate.
+        }
+        v
+    }
+
+    fn num_vertices(&self) -> usize {
+        self.lines.len() + 1
+    }
+
+    fn edges(&self) -> Vec<Line> {
+        self.lines.to_vec()
+    }
+
+    fn num_edges(&self) -> usize {
+        self.lines.len()
+    }
+
+    fn bbox(&self) -> Rectangle {
+        let mut min_x: Option<f64> = None;
+        let mut min_y: Option<f64> = None;
+        let mut max_x: Option<f64> = None;
+        let mut max_y: Option<f64> = None;
+        let vs = self.vertices();
+        for p in vs.iter() {
+            match min_x {
+                Some(current_min_x) => {
+                    if p.x < current_min_x {
+                        min_x = Some(p.x)
+                    }
+                }
+                None => min_x = Some(p.x),
+            }
+            match min_y {
+                Some(current_min_y) => {
+                    if p.y < current_min_y {
+                        min_y = Some(p.y)
+                    }
+                }
+                None => min_y = Some(p.y),
+            }
+
+            match max_x {
+                Some(current_max_x) => {
+                    if p.x > current_max_x {
+                        max_x = Some(p.x)
+                    }
+                }
+                None => max_x = Some(p.x),
+            }
+
+            match max_y {
+                Some(current_max_y) => {
+                    if p.y > current_max_y {
+                        max_y = Some(p.y)
+                    }
+                }
+                None => max_y = Some(p.y),
+            }
+        }
+
+        Rectangle {
+            p1: Point {
+                x: min_x.unwrap(),
+                y: min_y.unwrap(),
+            },
+            p2: Point {
+                x: max_x.unwrap(),
+                y: max_y.unwrap(),
+            },
+        }
+    }
 }
 
-// // Creates a Polyline from a slice of Points
-// func createPolylineFromPoints(points []Point) PolyLine {
-// 	var p PolyLine
-// 	for i, pt := range points {
-// 		if i > 0 {
-// 			line := createLine(points[i-1], pt)
-// 			p = append(p, line)
-// 		}
-// 	}
-// 	return p
-// }
-
-// // Creates a Polyline from a slice of lines
-// func createPolyLineFromLines(lines []Line) PolyLine {
-// 	var p PolyLine
-// 	for _, l := range lines {
-// 		p = append(p, l)
-// 	}
-// 	return p
-// }
-
-// //GetLength - Returns length of a polyline.
-// func (p *PolyLine) length() float64 {
-// 	var d float64
-// 	for _, l := range *p {
-// 		d = d + l.length()
-// 	}
-// 	return d
-// }
-
-// // GetVertices - returns all vertices in Polyline.
-// func (p *PolyLine) vertices() []Point {
-// 	var v []Point
-// 	for i, l := range *p {
-// 		if i == 0 {
-// 			v = append(v, Point{X: l[0].X, Y: l[0].Y}) // Add first point as well on first line.
-// 		}
-// 		v = append(v, Point{X: l[1].X, Y: l[1].Y}) // Only add 2nd Point normally so don't duplicate.
-// 	}
-// 	return v
-// }
-
-// func (p *PolyLine) getNumVertices() int {
-// 	return len(*p) + 1
-// }
-
-// func (p *PolyLine) bbox() BoundingBox {
-// 	points := p.vertices()
-// 	var minX float64
-// 	var minY float64
-// 	var maxX float64
-// 	var maxY float64
-
-// 	for _, pt := range points {
-// 		if pt.X < minX {
-// 			minX = pt.X
-// 		}
-// 		if pt.Y < minY {
-// 			minY = pt.Y
-// 		}
-// 		if pt.X > maxX {
-// 			maxX = pt.X
-// 		}
-// 		if pt.Y > maxY {
-// 			maxY = pt.Y
-// 		}
-
-// 	}
-// 	return BoundingBox{Point{X: minX, Y: minY}, Point{X: maxX, Y: maxY}}
-// }
-
-// // NumEdges returns the number of edges in this shape. // Copied from S2 //Move out, and create interface.
-// func (p *PolyLine) getNumEdges() int {
-// 	if len(*p) == 0 {
-// 		return 0
-// 	}
-// 	return len(*p) - 1
-// }
 
 // //ClosedChain - Check if is a closed chain of lines (i.e. it is a Polygon)
 // func (p *PolyLine) checkClosedChain() bool {

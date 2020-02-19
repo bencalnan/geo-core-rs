@@ -14,7 +14,6 @@ pub struct LatLng {
 
 // Methods
 impl LatLng {
-    
     fn new<T: Into<f64>>(lat: T, lng: T) -> LatLng {
         LatLng {
             lat: lat.into(),
