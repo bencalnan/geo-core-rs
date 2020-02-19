@@ -4,7 +4,6 @@ use crate::line::Line;
 use crate::point::Point;
 use crate::rectangle::Rectangle;
 
-//PolyLine - Aka Polygonal chain, linestring,
 struct PolyLine {
     lines: Vec<Line>,
 }
