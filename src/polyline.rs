@@ -127,29 +127,30 @@ impl PolyLine {
         }
         false
     }
+
+    fn centroid(&self) -> Point {
+        let mut x_top:f64 = 0.0;
+        let mut y_top:f64 = 0.0;
+        let mut x_bottom:f64 = 0.0;
+        let mut y_bottom:f64 = 0.0;
+
+        for l in self.lines.iter(){
+            let centroid = l.centroid();
+            let length = l.length();
+            x_top += centroid.x * length;
+            y_top += centroid.y * length;
+            x_bottom += length;
+            y_bottom += length;
+        }
+
+        let x_centroid = x_top / x_bottom;
+        let y_centroid = y_top / y_bottom;
+        Point {
+            x: x_centroid,
+            y: y_centroid
+        }
+    }
 }
-
-
-
-// //centroid - Return centroid of a polyline
-// func (p *PolyLine) centroid() Point {
-
-// 	var xTop = 0.0
-// 	var yTop = 0.0
-// 	var xBottom = 0.0
-// 	var yBottom = 0.0
-// 	for _, l := range *p {
-// 		centroid := l.centroid()
-// 		length := l.length()
-// 		xTop = xTop + centroid.X*length
-// 		yTop = yTop + centroid.Y*length
-// 		xBottom = xBottom + length
-// 		yBottom = yBottom + length
-// 	}
-// 	xCentroid := xTop / xBottom
-// 	yCentroid := yTop / yBottom
-// 	return Point{X: xCentroid, Y: yCentroid}
-// }
 
 // Traits
 impl Geometry for PolyLine {
