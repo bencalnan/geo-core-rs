@@ -110,27 +110,26 @@ impl PolyLine {
             },
         }
     }
+
+    fn closed_chain(&self) -> bool {
+        let start = self.lines[0].coords[0];
+        let end = self.lines[self.lines.len() - 1].coords[1];
+        let mut x = false;
+        let mut y = false;
+        if (start.x - end.x).abs() < 0.001 {
+            x = true
+        }
+        if (start.y - end.y).abs() < 0.001 { //As not allowed to compare two f64s
+            y = true
+        }
+        if x && y {
+            return true;
+        }
+        false
+    }
 }
 
 
-// //ClosedChain - Check if is a closed chain of lines (i.e. it is a Polygon)
-// func (p *PolyLine) checkClosedChain() bool {
-// 	pV := *p
-// 	start := pV[0][0]
-// 	end := pV[len(pV)-1][1]
-// 	x, y := false, false
-// 	if start.X == end.X {
-// 		x = true
-// 	}
-// 	if start.Y == end.Y {
-// 		y = true
-// 	}
-// 	if x == true && y == true {
-// 		return true
-// 	}
-// 	return false
-
-// }
 
 // //centroid - Return centroid of a polyline
 // func (p *PolyLine) centroid() Point {
