@@ -6,7 +6,6 @@ struct Polygon {
     lines: Vec<Line>,
 }
 
- 
 impl Polygon {
     fn new_from_points(points: Vec<Point>) -> Polygon {
         let mut pg = Polygon { lines: Vec::new() };
@@ -18,55 +17,40 @@ impl Polygon {
                 pg.lines.push(l);
             }
         }
-        
+
         // Final linestring to close end and first point.
-	    pg.lines.push(Line.new(points[points.length()-1], points[0]))
-    	pg
+        pg.lines
+            .push(Line.new(points[points.length() - 1], points[0]));
+        pg
+    }
+    //Vertices - Returns distinct vertices that make up the Polygon.
+    fn vertices(&self) -> Vec<Point> {
+        let mut distinct_points: Vec<Point> = Vec::new();
+        for line in self.lines {
+            distinct_points.push(line[0]);
+        }
+        distinct_points
+    }
+
+    // GetNumEdges - Returns NumEdges returns the number of edges in this shape.
+    fn num_edges(&self) -> i32 {
+        if self.lines.len() == 0 {
+            return 0;
+        }
+        return self.lines.len();
+    }
+
+    // //Perimeter - Returns perimeter of polygon
+    fn perimter(&self) -> f64 {
+        let mut d = 0.0;
+        for line in p.lines {
+            d = d + line.length()
+        }
+        return d;
     }
 }
-// // CreatePolygonFromPoints - Creates a Polygon from a slice of Points
-// func CreatePolygonFromPoints(points []Point) Polygon {
-// 	var p Polygon
-// 	for i, pt := range points {
-// 		if i > 0 {
-// 			line := createLine(points[i-1], pt)
-// 			p = append(p, line)
-// 		}
-// 	}
 
-// 	//Final linestring to close end and first point.
-// 	p = append(p, createLine(points[len(points)-1], points[0]))
 
-// 	return p
-// }
-
-// //Vertices - Returns distinct vertices that make up the Polygon.
-// func (p Polygon) Vertices() []Point {
-// 	var distinctPoints []Point
-// 	// distinctPoints = append(distinctPoints, p[0][0])
-// 	for _, l := range p {
-// 		distinctPoints = append(distinctPoints, l[0])
-// 	}
-// 	return distinctPoints
-// }
-
-// // GetNumEdges - Returns NumEdges returns the number of edges in this shape.
-// // Copied from S2
-// func (p *Polygon) GetNumEdges() int {
-// 	if len(*p) == 0 {
-// 		return 0
-// 	}
-// 	return len(*p)
-// }
-
-// //Perimeter - Returns perimeter of polygon
-// func (p *Polygon) Perimeter() float64 {
-// 	var d float64
-// 	for _, l := range *p {
-// 		d = d + l.length()
-// 	}
-// 	return d
-// }
 
 // // Area - Returns area of polygon
 // // https://www.mathopenref.com/coordpolygonarea.html
