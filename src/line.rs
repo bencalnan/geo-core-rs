@@ -26,7 +26,7 @@ impl Line {
         }
     }
     //The Euclidean distance between two points of the plane with Cartesian coordinates
-    //Calculates Hypoteneuse between two Points.
+    //Calculates Hypotenuse between two Points.
     pub fn length(&self) -> f64 {
         ((self.coords[1].x - self.coords[0].x).powi(2)
             + (self.coords[1].y - self.coords[0].y).powi(2))

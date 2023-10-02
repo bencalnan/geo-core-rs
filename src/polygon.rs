@@ -1,4 +1,6 @@
 #![allow(dead_code)]
+
+use crate::geometry::Geometry;
 use crate::line::Line;
 use crate::point::Point;
 use crate::rectangle::Rectangle;
@@ -10,7 +12,7 @@ struct Polygon {
 impl Polygon {
     fn new_from_points(points: Vec<Point>) -> Polygon {
         let mut pg = Polygon { lines: Vec::new() };
-        for (i, pg) in points.iter().enumerate() {
+        for (i, pt) in points.iter().enumerate() {
             if i > 0 {
                 let l: Line = Line {
                     coords: [points[i - 1], *pt],
@@ -21,7 +23,7 @@ impl Polygon {
 
         // Final linestring to close end and first point.
         pg.lines
-            .push(Line.new(points[points.length() - 1], points[0]));
+            .push(Line::new(points[points.length() - 1], points[0]));
         pg
     }
     //Vertices - Returns distinct vertices that make up the Polygon.
@@ -34,7 +36,7 @@ impl Polygon {
     }
 
     // GetNumEdges - Returns NumEdges returns the number of edges in this shape.
-    fn num_edges(&self) -> i32 {
+    fn num_edges(&self) -> usize {
         if self.lines.len() == 0 {
             return 0;
         }
@@ -44,7 +46,7 @@ impl Polygon {
     // Perimeter - Returns perimeter of polygon
     fn perimeter(&self) -> f64 {
         let mut d = 0.0;
-        for line in p.lines {
+        for line in self.lines {
             d = d + line.length()
         }
         return d;
@@ -55,23 +57,23 @@ impl Polygon {
     // Note does not work for self intersecting polygons. (need to add catch for this. )
     fn area(&self) -> f64 {
         let mut distinct_points: Vec<Point> = self.vertices();
-        distinct_points.append(distinct_points[0].clone());
+        distinct_points.push(distinct_points[0].clone());
         let mut sub_total: f64 = 0.0;
-        for (_point, i) in distinct_points.iter() {
-            let mut part: f64 = (distinctPoints[i].x * distinctPoints[i + 1].y)
-                + (distinctPoints[i].y * distinctPoints[i + 1].x);
-            subTotal = subTotal + part
+        for (i) in distinct_points.iter().enumerate() {
+            let part: f64 = (distinct_points[i].x * distinct_points[i + 1].y)
+                + (distinct_points[i].y * distinct_points[i + 1].x);
+            sub_total = sub_total + part
         }
         return sub_total / 2;
     }
 
     fn bbox(&self) -> Rectangle {
-        let mut distinct_points = &self.vertices();
-        distinct_points.append(distinct_points[0].clone());
-        let mut min_x: f64;
-        let mut min_y: f64;
-        let mut max_x: f64;
-        let mut max_y: f64;
+        let mut distinct_points = &self.vertices().clone();
+        distinct_points.push(distinct_points[0].clone());
+        let mut min_x: f64 = 0.0;
+        let mut min_y: f64 = 0.0;
+        let mut max_x: f64 = 0.0;
+        let mut max_y: f64 = 0.0;
         for pt in distinct_points {
             if pt.x < min_x {
                 min_x = pt.x
@@ -86,13 +88,16 @@ impl Polygon {
                 max_y = pt.y
             }
         }
-        return Rectangle{p1{x: min_x, y: min_y}, p2{x: max_x, y: max_y}}
+        return Rectangle {
+            p1: Point { x: min_x, y: min_y },
+            p2: Point { x: max_x, y: max_y },
+        };
     }
 
     //ClosedChain - Check if is a closed chain of lines (i.e. it is a Polygon)
     fn closed_chain(&self) -> bool {
         let start = self.lines[0][0];
-        let end = self.lines[self.lines.len() -1][1];
+        let end = self.lines[self.lines.len() - 1][1];
         let mut x = false;
         let mut y = false;
         if start.x == end.x {
@@ -102,10 +107,9 @@ impl Polygon {
             y = true
         }
         if x == true && y == true {
-            return true
+            return true;
         }
         return false;
-            
     }
 }
 
