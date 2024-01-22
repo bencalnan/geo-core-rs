@@ -23,14 +23,14 @@ impl Polygon {
 
         // Final linestring to close end and first point.
         pg.lines
-            .push(Line::new(points[points.length() - 1], points[0]));
+            .push(Line::new(points[points.len() - 1], points[0]));
         pg
     }
     //Vertices - Returns distinct vertices that make up the Polygon.
     fn vertices(&self) -> Vec<Point> {
         let mut distinct_points: Vec<Point> = Vec::new();
-        for line in self.lines {
-            distinct_points.push(line[0]);
+        for line in &self.lines {
+            distinct_points.push(line.coords[0].clone());
         }
         distinct_points
     }
@@ -46,7 +46,7 @@ impl Polygon {
     // Perimeter - Returns perimeter of polygon
     fn perimeter(&self) -> f64 {
         let mut d = 0.0;
-        for line in self.lines {
+        for line in &self.lines {
             d = d + line.length()
         }
         return d;
@@ -59,17 +59,16 @@ impl Polygon {
         let mut distinct_points: Vec<Point> = self.vertices();
         distinct_points.push(distinct_points[0].clone());
         let mut sub_total: f64 = 0.0;
-        for (i) in distinct_points.iter().enumerate() {
+        for (i, _) in distinct_points.iter().enumerate() {
             let part: f64 = (distinct_points[i].x * distinct_points[i + 1].y)
                 + (distinct_points[i].y * distinct_points[i + 1].x);
             sub_total = sub_total + part
         }
-        return sub_total / 2;
+        return sub_total / 2.0;
     }
 
     fn bbox(&self) -> Rectangle {
-        let mut distinct_points = &self.vertices().clone();
-        distinct_points.push(distinct_points[0].clone());
+        let distinct_points = &self.vertices().clone();
         let mut min_x: f64 = 0.0;
         let mut min_y: f64 = 0.0;
         let mut max_x: f64 = 0.0;
@@ -96,8 +95,8 @@ impl Polygon {
 
     //ClosedChain - Check if is a closed chain of lines (i.e. it is a Polygon)
     fn closed_chain(&self) -> bool {
-        let start = self.lines[0][0];
-        let end = self.lines[self.lines.len() - 1][1];
+        let start = self.lines[0].coords[0];
+        let end = self.lines[self.lines.len() - 1].coords[1];
         let mut x = false;
         let mut y = false;
         if start.x == end.x {
