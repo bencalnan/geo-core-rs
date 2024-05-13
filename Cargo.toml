@@ -5,7 +5,7 @@ authors = ["Ben Calnan <bencalnan@gmail.com>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
 keywords = ["geospatial"]
-include = ["/src", "Cargo.toml"]
+include = ["/src"]
 
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
