@@ -2,10 +2,12 @@
 name = "geo-core"
 version = "0.1.0"
 authors = ["Ben Calnan <bencalnan@gmail.com>"]
+description = "Common tools for working with spatial data"
 edition = "2018"
 license = "MIT OR Apache-2.0"
 keywords = ["geospatial"]
 include = ["/src"]
+repository = "https://github.com/bencalnan/geo-core-rs"
 
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
