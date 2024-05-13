@@ -54,3 +54,16 @@ impl LatLng {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_convert_to_radian() {
+        let london_eye_lat_lng = LatLng {lat: 51.5032, lng: -0.1195 };        
+        assert_eq!(format!("{:.4}", london_eye_lat_lng.convert_to_radian().lat), "0.8989");
+        assert_eq!(format!("{:.4}", london_eye_lat_lng.convert_to_radian().lng), "-0.0021");
+    }
+
+}
