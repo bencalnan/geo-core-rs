@@ -45,3 +45,6 @@ Library of common geographic functions and tools in Rust
 
 - Convert degrees to radians
 - Convert radians to degrees
+- Point To Point Distance Cosine
+- Point To Point Distance Haversine
+- Point To Point Distance Cartesian

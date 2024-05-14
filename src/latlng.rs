@@ -21,32 +21,32 @@ impl LatLng {
         }
     }
 
-    fn new_from_point(p: Point) -> LatLng {
+    pub fn new_from_point(p: Point) -> LatLng {
         LatLng { lat: p.y, lng: p.x }
     }
 
-    fn convert_to_radian(&self) -> LatLng {
+    pub fn convert_to_radian(&self) -> LatLng {
         LatLng {
             lat: deg_to_rad(self.lat),
             lng: deg_to_rad(self.lng),
         }
     }
 
-    fn convert_to_degrees(&self) -> LatLng {
+    pub fn convert_to_degrees(&self) -> LatLng {
         LatLng {
             lat: rad_to_deg(self.lat),
             lng: rad_to_deg(self.lng),
         }
     }
 
-    fn convert_to_point(&self) -> Point {
+    pub fn convert_to_point(&self) -> Point {
         Point {
             x: self.lng,
             y: self.lat,
         }
     }
 
-    fn convert_to_point3d(&self) -> Point3D {
+    pub fn convert_to_point3d(&self) -> Point3D {
         Point3D {
             x: EARTH_RADIUS * self.lat.cos() * self.lng.cos(),
             y: EARTH_RADIUS * self.lat.cos() * self.lng.sin(),

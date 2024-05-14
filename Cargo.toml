@@ -1,6 +1,6 @@
 [package]
 name = "geo-core"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Ben Calnan <bencalnan@gmail.com>"]
 description = "Common tools for working with spatial data"
 edition = "2021"
