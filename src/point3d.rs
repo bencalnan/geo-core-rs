@@ -1,7 +1,7 @@
 #![allow(dead_code)]
 use crate::constants::EARTH_RADIUS;
-use crate::latlng::LatLng;
 use crate::geometry::Geometry;
+use crate::latlng::LatLng;
 
 //Point3D - 3 Dimensional Point
 pub struct Point3D {

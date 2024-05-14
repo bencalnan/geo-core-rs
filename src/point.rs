@@ -1,6 +1,6 @@
 #![allow(dead_code)]
-use crate::latlng::LatLng;
 use crate::geometry::Geometry;
+use crate::latlng::LatLng;
 
 #[derive(Copy, Clone)]
 pub struct Point {
@@ -33,7 +33,6 @@ impl Point {
             y: self.y - n.y,
         }
     }
-    
 }
 
 impl Geometry for Point {
@@ -41,4 +40,3 @@ impl Geometry for Point {
         String::from("point")
     }
 }
-

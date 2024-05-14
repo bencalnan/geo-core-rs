@@ -45,9 +45,13 @@ Library of common geographic functions and tools in Rust
 
 - Convert degrees to radians
 - Convert radians to degrees
-- Point To Point Distance Cosine
-- Point To Point Distance Haversine
-- Point To Point Distance Cartesian
-- Point to Rectangle Distance Cartesian
-- Point to Line Distance Cartesian
-- Point to Line Distance Geographic 
+- Point To Point Distance Cosine (Geographic)
+- Point To Point Distance Haversine (Geographic)
+- Point To Point Distance  (Cartesian)
+- Point to Rectangle Distance  (Cartesian)
+- Point to Rectangle Distance (Geographic)
+- Point to Line Distance (Cartesian)
+- Point to Line Distance (Geographic)
+- Mid point of two points (Geographic)
+- Find bearing between start and end point (Geographic)
+- Find cross track min distance between a great arc and another point (Geographic)

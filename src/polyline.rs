@@ -119,7 +119,8 @@ impl PolyLine {
         if (start.x - end.x).abs() < 0.001 {
             x = true
         }
-        if (start.y - end.y).abs() < 0.001 { //As not allowed to compare two f64s
+        if (start.y - end.y).abs() < 0.001 {
+            //As not allowed to compare two f64s
             y = true
         }
         if x && y {
@@ -129,12 +130,12 @@ impl PolyLine {
     }
 
     fn centroid(&self) -> Point {
-        let mut x_top:f64 = 0.0;
-        let mut y_top:f64 = 0.0;
-        let mut x_bottom:f64 = 0.0;
-        let mut y_bottom:f64 = 0.0;
+        let mut x_top: f64 = 0.0;
+        let mut y_top: f64 = 0.0;
+        let mut x_bottom: f64 = 0.0;
+        let mut y_bottom: f64 = 0.0;
 
-        for l in self.lines.iter(){
+        for l in self.lines.iter() {
             let centroid = l.centroid();
             let length = l.length();
             x_top += centroid.x * length;
@@ -147,7 +148,7 @@ impl PolyLine {
         let y_centroid = y_top / y_bottom;
         Point {
             x: x_centroid,
-            y: y_centroid
+            y: y_centroid,
         }
     }
 }

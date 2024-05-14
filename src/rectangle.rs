@@ -1,6 +1,6 @@
 #![allow(dead_code)]
-use crate::point::Point;
 use crate::geometry::Geometry;
+use crate::point::Point;
 
 pub struct Rectangle {
     pub min_point: Point,
