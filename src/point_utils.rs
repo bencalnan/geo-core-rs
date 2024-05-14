@@ -146,7 +146,6 @@ fn check_between_longs(l: &LatLng, b: &Rectangle) -> bool {
     return false;
 }
 
-
 // MidPointGeographicCoordinates - Get the mid point of two points (geographic)
 // Input and Output in Radians.
 pub fn mid_point_geographic_coordinates(a: LatLng, b: LatLng) -> LatLng {
@@ -220,19 +219,26 @@ mod tests {
         assert_eq!(distance.round(), 217.0);
     }
 
-	#[test]
-	fn test_point_to_bounding_box_geographic() {
+    #[test]
+    fn test_point_to_bounding_box_geographic() {
+        let test_bbox = Rectangle {
+            min_point: Point {
+                x: 1.070678,
+                y: 51.279336,
+            },
+            max_point: Point {
+                x: 1.071720,
+                y: 51.277559,
+            },
+        };
 
-		let test_bbox = Rectangle{
-			min_point: Point{x: 1.070678, y: 51.279336},
-			max_point: Point{x: 1.071720, y: 51.277559},
-		};
-	
-		// //Point which should return a distnace to a point on the line.
-		let start_point = LatLng{lat: 51.27936, lng: 1.07263};
-		let distance = point_to_rectangle_distance_geographic(start_point, test_bbox);
-	
-		assert_eq!(distance.round(), 210.0);
-	}
+        // //Point which should return a distnace to a point on the line.
+        let start_point = LatLng {
+            lat: 51.27936,
+            lng: 1.07263,
+        };
+        let distance = point_to_rectangle_distance_geographic(start_point, test_bbox);
 
+        assert_eq!(distance.round(), 210.0);
+    }
 }
