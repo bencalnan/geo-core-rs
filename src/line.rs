@@ -15,11 +15,11 @@ impl Line {
 
     pub fn bbox(&self) -> Rectangle {
         Rectangle {
-            p1: Point {
+            min_point: Point {
                 x: self.coords[0].x.min(self.coords[1].x),
                 y: self.coords[0].y.min(self.coords[1].y),
             },
-            p2: Point {
+            max_point: Point {
                 x: self.coords[0].x.max(self.coords[1].x),
                 y: self.coords[0].y.max(self.coords[1].y),
             },

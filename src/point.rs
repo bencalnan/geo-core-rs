@@ -33,6 +33,7 @@ impl Point {
             y: self.y - n.y,
         }
     }
+    
 }
 
 impl Geometry for Point {

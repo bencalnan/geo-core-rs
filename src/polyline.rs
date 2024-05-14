@@ -100,11 +100,11 @@ impl PolyLine {
         }
 
         Rectangle {
-            p1: Point {
+            min_point: Point {
                 x: min_x.unwrap(),
                 y: min_y.unwrap(),
             },
-            p2: Point {
+            max_point: Point {
                 x: max_x.unwrap(),
                 y: max_y.unwrap(),
             },

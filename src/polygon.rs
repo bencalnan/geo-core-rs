@@ -88,8 +88,8 @@ impl Polygon {
             }
         }
         return Rectangle {
-            p1: Point { x: min_x, y: min_y },
-            p2: Point { x: max_x, y: max_y },
+            min_point: Point { x: min_x, y: min_y },
+            max_point: Point { x: max_x, y: max_y },
         };
     }
 

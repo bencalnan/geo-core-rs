@@ -15,7 +15,7 @@ impl Point3D {
         Point3D { x, y, z }
     }
     //ConvertToLatLng - Takes a 3D Cartesian Point (ECEF) and returns Lat/Lngs in Radians. (Geocentric -> Geodetic)
-    fn convert_to_lat_lng(&self) -> LatLng {
+    pub fn convert_to_lat_lng(&self) -> LatLng {
         LatLng {
             lat: (self.z / EARTH_RADIUS).asin(),
             lng: self.y.atan2(self.x),

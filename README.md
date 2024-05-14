@@ -48,3 +48,6 @@ Library of common geographic functions and tools in Rust
 - Point To Point Distance Cosine
 - Point To Point Distance Haversine
 - Point To Point Distance Cartesian
+- Point to Rectangle Distance Cartesian
+- Point to Line Distance Cartesian
+- Point to Line Distance Geographic 
